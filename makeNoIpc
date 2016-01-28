@@ -1,0 +1,3 @@
+echo "Compilando..."
+gcc cinema.c user.c clientFront.c database.c client.c lib/getnum.c -o run
+echo "Done!"

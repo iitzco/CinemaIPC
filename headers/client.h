@@ -1,0 +1,1 @@
+int getBoardClient (char buf[][50]);
