@@ -30,11 +30,11 @@ char* getString(int com){
 }
 
 void worker(int pid){
-	printf("\nWorker Designado para el cliente: %d\n",pid);
+	printf("\nWorker created to deal with client: %d\n",pid);
 	int done=0;
 	struct com command;
 	receiveCommand(&command,pid);
-	printf("Atendiendo cliente %d que busca %s\n",pid,getString(command.op));
+	printf("Handling client %d who is looking forward to %s\n",pid,getString(command.op));
 	struct ret ret;
 	int i=0;
 	switch (command.op){

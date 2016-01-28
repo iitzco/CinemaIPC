@@ -70,7 +70,7 @@ int receiveRequest (int fdSocketServer){
 	int fd;
 	int len;
 	struct sockaddr_in cli;
-	printf("Esperando...\n");
+	printf("Waiting client...\n");
 	if((fd=accept(fdSocketServer,NULL,NULL))==-1){
 		//printf("No se puede hacer accept\n");
 		return -1;

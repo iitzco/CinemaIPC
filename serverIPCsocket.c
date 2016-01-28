@@ -30,10 +30,10 @@ char* getString(int com){
 }
 
 void worker(int fd){
-	printf("\nWorker Designado con el fd: %d\n",fd);
+	printf("\nWorker created with file descriptor: %d\n",fd);
 	struct com command;
 	receiveCommand(&command,fd);
-	printf("Handling client who looks for %s\n", getString(command.op));
+	printf("Handling client who is looking forward to %s\n", getString(command.op));
 	struct ret ret;
 	int i=0;
 	switch (command.op){
