@@ -85,7 +85,7 @@ int addClientPid(int clientpid){
 	// printf("addClientPid\n");
 	int fd_clientpids = open(CLIENTPIDS,O_WRONLY|O_CREAT,0666);
 	if(fd_clientpids == -1 || writen(fd_clientpids,&clientpid,sizeof(int))!=sizeof(int)){
-		printf("Error al escribir el archivo de clientes.\n");
+		// printf("Error al escribir el archivo de clientes.\n");
 		return -1;
 	}
 	close(fd_clientpids);
@@ -101,7 +101,7 @@ int writeServerPid(){
 	int pid_srv = getpid();
 	//printf("El pid de este servidor es: %d.\n",pid_srv);
 	if(fd_srv ==-1 || writen(fd_srv,&pid_srv,sizeof(int))!=sizeof(int)){
-		printf("Error al escribir el archivo del servidor.\n");
+		// printf("Error al escribir el archivo del servidor.\n");
 		return -1;
 	}
 	close(fd_srv);
@@ -117,11 +117,11 @@ int getServerPid(){
 	int fd_srv = open(SERVERFILE,O_RDONLY);
 	int pid_srv = -1;
 	if(fd_srv==-1){
-		printf("Error al abrir el archivo del servidor\n");
+		// printf("Error al abrir el archivo del servidor\n");
 		return -1;
 	}
 	if(readn(fd_srv,&pid_srv,sizeof(int))!=sizeof(int)){
-		printf("Error al leer el archivo del servidor\n");
+		// printf("Error al leer el archivo del servidor\n");
 		return -1;	
 	}
 	close(fd_srv);
@@ -137,13 +137,13 @@ int readComm(void* str,int method,int clientpid){
 	if(fd_com==-1 || readn(fd_com,str,method)!=method){
 		switch(method){
 			case REQUEST:
-				printf("Error al leer request.\n");
+				// printf("Error al leer request.\n");
 				break;
 			case RESPONSE:
-				printf("Error al leer response.\n");
+				// printf("Error al leer response.\n");
 				break;
 			default:
-				printf("Error en el método al leer.\n");
+				// printf("Error en el método al leer.\n");
 		}
 		return -1;
 	}
@@ -161,13 +161,13 @@ int addComm(void* str,int method,int clientpid){
 	if(fd_com==-1||writen(fd_com,str,method)!=method){
 		switch(method){
 			case REQUEST:
-				printf("Error al escribir request.\n");
+				// printf("Error al escribir request.\n");
 				break;
 			case RESPONSE:
-				printf("Error al escribir response.\n");
+				// printf("Error al escribir response.\n");
 				break;
 			default:
-				printf("Error en el método al escribir.\n");
+				// printf("Error en el método al escribir.\n");
 
 		}
 		return -1;
@@ -188,7 +188,7 @@ int waitSignal(int asignal){
 	signal(asignal,doNothing);
 	int sig=0;
 	if(sigwait(&set,&sig)!=0){
-		printf("Error en la señal.\n");
+		// printf("Error en la señal.\n");
 		return -1;
 	}
 	// printf("Recibio señal %d\n",sig);

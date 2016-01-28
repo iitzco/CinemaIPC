@@ -9,22 +9,22 @@
 char* getString(int com){
 	switch(com){
 		case ADD_MOVIE:
-			return "agregar una pelicula";
+			return "add a movie";
 			break;
 		case DEL_MOVIE:
-			return "borrar una pelicula";
+			return "delete a movie";
 			break;
 		case AVAIL:
-			return "ver disponibilidad";
+			return "see availability";
 			break;
 		case BUY_TICK:
-			return "comprar tickets";
+			return "buy tickets";
 			break;
 		case CANCEL_TICK:
-			return "cancelar tickets";
+			return "cancel tickets";
 			break;
 		case SEE_BOARD:
-			return "ver cartelera";
+			return "see movie list";
 			break;
 	}
 }
@@ -83,9 +83,9 @@ int main(int argc, char const *argv[])
 {
 	int done=0;
 	system("clear");
-	printf("Server Inicializado.\n");
+	printf("Server initialized.\n");
 	while (!done){
-		printf("Esperando cliente...\n");
+		printf("Waiting client...\n");
 		int pidClient=receivePID();
 		if (pidClient!=-1){
 			int pid;

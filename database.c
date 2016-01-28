@@ -82,12 +82,12 @@ int addMovie (char * movie_name)
 		fd1=open("DB/.lock",O_RDWR|O_CREAT);
 		lock(fd1,F_WRLCK);
 		if (write(fd1,&n,sizeof(int))==-1){
-			printf("No pudo escribir el cero\n");
+			// printf("No pudo escribir el cero\n");
 			return -2;
 		}
 	}
 	if (read(fd1,&n,sizeof(int))==-1){
-		printf("No puede leer de .lock\n");
+		// printf("No puede leer de .lock\n");
 		return -2;
 	}
 	if (n==10){
@@ -98,12 +98,12 @@ int addMovie (char * movie_name)
 	close(fd1);
 	fd1=open("DB/.lock",O_RDWR);
 	if (fd1==-1){
-		printf("No puede abrir .lock\n");
+		// printf("No puede abrir .lock\n");
 		return -2;
 	}
 
 	if (write(fd1,&n,sizeof(int))==-1){
-		printf("No pudo escribir el n en .lock\n");
+		// printf("No pudo escribir el n en .lock\n");
 		return -2;
 	}
 
@@ -154,14 +154,14 @@ int deleteMovie (char * movie_name)
 	}
 	int n=0;
 	if (read(fd1,&n,sizeof(int))==-1){
-		printf("No puede leer el .lock para borrar\n");
+		// printf("No puede leer el .lock para borrar\n");
 		return -1;
 	}
 	//printf("cantidad de pelis %d\n",n);
 	n--;
 	lseek(fd1,SEEK_SET,0);
 	if (write(fd1,&n,sizeof(int))==-1){
-		printf("No puede escribir el .lock para borrar\n");
+		// printf("No puede escribir el .lock para borrar\n");
 		return -1;
 	}
 	unlock(fd);

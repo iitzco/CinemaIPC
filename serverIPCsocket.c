@@ -9,22 +9,22 @@
 char* getString(int com){
 	switch(com){
 		case ADD_MOVIE:
-			return "agregar una pelicula";
+			return "add a movie";
 			break;
 		case DEL_MOVIE:
-			return "borrar una pelicula";
+			return "delete a movie";
 			break;
 		case AVAIL:
-			return "ver disponibilidad";
+			return "see availability";
 			break;
 		case BUY_TICK:
-			return "comprar tickets";
+			return "buy tickets";
 			break;
 		case CANCEL_TICK:
-			return "cancelar tickets";
+			return "cancel tickets";
 			break;
 		case SEE_BOARD:
-			return "ver cartelera";
+			return "see movie list";
 			break;
 	}
 }
@@ -33,7 +33,7 @@ void worker(int fd){
 	printf("\nWorker Designado con el fd: %d\n",fd);
 	struct com command;
 	receiveCommand(&command,fd);
-	printf("Atendiendo al cliente que busca %s\n", getString(command.op));
+	printf("Handling client who looks for %s\n", getString(command.op));
 	struct ret ret;
 	int i=0;
 	switch (command.op){
@@ -86,10 +86,10 @@ int main(int argc, char const *argv[])
 	system("clear");
 	fdServer=initializeServerSocket();
 	if (fdServer==-1){
-		printf("El socket ha sido abierto recientemente.\nEspere unos minutos antes de abrirlo nuevamente.\n\n");
+		printf("The socket was recently closed.\nWait some minuts in order to open it again.\n\n");
 		return -1;
 	}
-	printf("Server Inicializado.\n");
+	printf("Server initialized.\n");
 	while (!done){
 		int fd=receiveRequest(fdServer);
 		if (fd!=-1){

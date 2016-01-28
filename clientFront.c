@@ -21,57 +21,57 @@
 void addMovieFront()
 {
 	char name[50];
-   	printf(KBLU"\nIngresar nombre de la pelicula que se desea agregar: "RESET);
+   	printf(KBLU"\nType the name of the movie you want to add to the list: "RESET);
    	scanf("%s", name);
    	int c=addMovieCinema((char *)name);
   	if (c==-1){
-  		printf(KRED"\nLa pelicula ya se encuentra en cartelera.\n\n"RESET);
+  		printf(KRED"\nMovie already in the movie list.\n\n"RESET);
   		return;
   	}
   	if (c==-2){
-  		printf(KRED"\nError inesperado. Intente nuevamente mas tarde.\n\n"RESET);
+  		printf(KRED"\nError. Try again later.\n\n"RESET);
   		return;
   	}
   	if (c==-3){
-  		printf(KRED"\nLa cartelera esta completa. Elimina una pelicula para poder agregas otra.\n\n"RESET);
+  		printf(KRED"\nList of movies if full. Delete one movie in order to add another one.\n\n"RESET);
   		return;
   	}
-  	printf(KGRN"\nSe agrego la pelicula %s a la cartelera con capacidad inicial: %d \n\n"RESET, name,MOVIE_SEATS);
+  	printf(KGRN"\nThe movie %s was added to the movie list with initiali capacity: %d \n\n"RESET, name,MOVIE_SEATS);
   	return;
 }
 
 
 void deleteMovieFront(){
 char name[50];
-   printf(KBLU"\nIngresar nombre de la pelicula que se desea eliminar:  "RESET);
+   printf(KBLU"\nEnter the name of the movie you want to delete from the list::  "RESET);
    scanf("%s", name);
    int c=deleteMovieCinema(name);
    if(c==-1){
-   	printf(KRED"\nLa pelicula %s no se encuentra en cartelera.\n\n"RESET,name);
+   	printf(KRED"\nThe movie %s is not on the list.\n\n"RESET,name);
    	return;
    }
    if (c==-2){
-  		printf(KRED"\nError inesperado. Intente nuevamente mas tarde.\n\n"RESET);
+  		printf(KRED"\nError. Try again later.\n\n"RESET);
   		return;
   	}
-   printf(KGRN"\nSe ha eliminado la pelicula %s de la cartelera\n\n"RESET, name);
+   printf(KGRN"\nThe movie %s was deleted from the movie list.\n\n"RESET, name);
   	return;
 }
 
 void checkAvailabilityFront()
 {
 	char name[50];
-   	printf(KBLU"\nIngresar nombre de la pelicula: "RESET);
+   	printf(KBLU"\nEnter the name of the movie: "RESET);
    	scanf("%s", name);
 
    	char * buf= malloc (MOVIE_SEATS*sizeof(char));
    	char * buf2= malloc ((MOVIE_SEATS)*sizeof(char));
    	if (checkAvailabilityUser(name,buf)!=0){
-   		printf(KRED"\nNo se encuentra esa pelicula en cartelera.\n\n"RESET);
+   		printf(KRED"\nThat movie is not on the movie list.\n\n"RESET);
    		return;
    	}
    	int i = 0;
-   	printf("\nAsientos disponibles: \n");
+   	printf("\nAvailable seats: \n");
    	for (; i < MOVIE_SEATS; i++){
    		if (i%5==0)
    			printf("\n");
@@ -85,57 +85,57 @@ void checkAvailabilityFront()
 
 void buyTicketsFront(){
 	char name[50];
-   	printf(KBLU"\nIngresar nombre de la pelicula: "RESET);
+   	printf(KBLU"\nEnter the name of the movie: "RESET);
    	scanf("%s", name);
-   	int n=getint(KBLU"\nIngrese la cantidad de asientos a comprar: "RESET);
+   	int n=getint(KBLU"\nEnter how many seats you want to buy: "RESET);
    	int vec[n];
    	int i=0;
    	while (i<n){
-   		vec[i++]=getint(KBLU"\nAsiento nro %d: "RESET,i);
+   		vec[i++]=getint(KBLU"\nSeat number %d: "RESET,i);
    	}
    	int id=buyTicketsUser(name,vec,n);
 	if (id==-1)
-		printf(KRED"\nError inesperado. Intente nuevamente mas tarde.\n\n"RESET);
+		printf(KRED"\nError. Try again later.\n\n"RESET);
 	else if (id==-2)
-		printf(KRED"\nEsos asientos no estan disponibles.\n\n"RESET);
+		printf(KRED"\nThat seats are not available.\n\n"RESET);
 	else if(id==-3)		
-		printf(KRED"\nLa pelicula no existe!\n\n"RESET);
+		printf(KRED"\nThat movie is not on the movie list!\n\n"RESET);
 	else
-		printf(KGRN"\nCompra exitosa.\nID de la compra: %d \n\n"RESET, id);
+		printf(KGRN"\nSuccess.\nPurchase ID: %d \n\n"RESET, id);
 	
 }
 
 void cancelTicketsFront(){
 	char name[50];
-   	printf(KBLU"\nIngresar nombre de la pelicula: "RESET);
+   	printf(KBLU"\nEnter the name of the movie: "RESET);
    	scanf("%s", name);
-   	int n=getint(KBLU"\nIngrese el ID de la compra: "RESET);
+   	int n=getint(KBLU"\nEnter the purchase ID: "RESET);
    	int ret=cancelTicketsUser(name,n);
    	if (ret==-1)
-   		printf(KRED"\nNo existe compra con ese ID\n\n"RESET);
+   		printf(KRED"\nThat purchase ID does not exist\n\n"RESET);
    	else if (ret==-2)
-   		printf(KRED"\nError inesperado. Intente nuevamente mas tarde.\n\n"RESET);
+   		printf(KRED"\nError. Try again later.\n\n"RESET);
    	else if (ret==-3)
-   		printf(KRED"\nNo existe esa pelicula.\n\n"RESET);
+   		printf(KRED"\nThat movie is not on the movie list.\n\n"RESET);
    	else
-   		printf(KGRN"\nTickets cancelados.\n\n"RESET);	
+   		printf(KGRN"\nPurchase canceled.\n\n"RESET);	
 }
 
 void printUserMenu()
 {
-	printf("1 - Comprar tickets\n");
-	printf("2 - Cancelar tickets\n");
-	printf("3 - Disponibilidad\n");
-	printf("4 - Cartelera\n");
-	printf("Presione 5 para salir\n\n");
+	printf("1 - Buy tickets\n");
+	printf("2 - Cancel tickets\n");
+	printf("3 - Availability\n");
+	printf("4 - Movie List\n");
+	printf("Enter 5 to exit\n\n");
 }
 
 void printCinemaMenu()
 {
-	printf("1 - Agregar pelicula\n");
-	printf("2 - Eliminar pelicula\n");
-	printf("3 - Cartelera\n");
-	printf("Presione 4 para salir\n\n");
+	printf("1 - Add movie\n");
+	printf("2 - Delete movie\n");
+	printf("3 - Availability\n");
+	printf("Press 4 to exit\n\n");
 }
 
 int getBoardFront(){
@@ -143,8 +143,8 @@ int getBoardFront(){
 	 CLEAR_SCREEN
 	int n=0;
 	if ((n=getBoardClient(mat))==-1)
-		printf("Error inesperado. Intente nuevamente mas tarde.\n");
-	printf(KYEL"\nCARTELERA\n\n"RESET);
+		printf("Error. Try again later.\n");
+	printf(KYEL"\nMOVIE LIST\n\n"RESET);
 	int i=0;
 	for (; i < n; ++i)
 	{
@@ -155,12 +155,12 @@ int getBoardFront(){
 
 int user() {
 	CLEAR_SCREEN
-	printf(KCYN"Bienvenido a su cine virtual\n\n"RESET);
-	printf("Aqui se encuentra el menu de opciones disponibles:\n");	
+	printf(KCYN"Welcome to the Virtual Cinema\n\n"RESET);
+	printf("Available options:\n");	
 	while(TRUE)
 	{
 		printUserMenu();
-		int c=getint(KBLU"Ingrese la opcion deseada: "RESET);
+		int c=getint(KBLU"Enter the desired option (number): "RESET);
 		switch(c)
 		{
 			case 1: 
@@ -178,7 +178,7 @@ int user() {
 			case 5:
 					return 0;
 			default:
-					printf(KRED"Comando invalido\n"KRED);
+					printf(KRED"Invalid command\n"KRED);
 					break;
 		}
 
@@ -189,12 +189,12 @@ int user() {
 
 int cinema() {	
 	CLEAR_SCREEN
-	printf(KCYN"Administracion de cartelera\n\n"RESET);
-	printf("Aqui se encuentra el menu de opciones disponibles:\n");
+	printf(KCYN"Cinema Administration\n\n"RESET);
+	printf("Available options:\n");
 	while(TRUE)
 	{
 		printCinemaMenu();
-		int c=getint(KBLU"Ingrese la opcion deseada: "RESET);
+		int c=getint(KBLU"Enter the desired option (number): "RESET);
 		switch(c)
 		{
 			case 1: 
@@ -210,7 +210,7 @@ int cinema() {
 					return 0;
 					break;
 			default:
-					printf(KBLU"Comando invalido\n"RESET);
+					printf(KBLU"Invalid command\n"RESET);
 					break;
 		}
 
@@ -221,13 +221,13 @@ int cinema() {
 int main(int argc, char const *argv[])
 {
 	CLEAR_SCREEN;
-	printf("Desea ingresar como:\n");
-	printf("1 - Cliente\n");
-	printf("2 - Administrador\n");
-	printf("Presione 3 para salir\n\n");
+	printf("Wish to enter as:\n");
+	printf("1 - Client\n");
+	printf("2 - Admin\n");
+	printf("Press 3 to exit\n\n");
 	
 	while(TRUE){
-		int c=getint(KBLU"Ingrese el numero deseado: "RESET);
+		int c=getint(KBLU"Enter the desired option (number): "RESET);
 		switch(c){
 			case 1:
 					return user();
@@ -236,7 +236,7 @@ int main(int argc, char const *argv[])
 			case 3:
 					return 0;
 			default:
-					printf(KRED"Comando invalido\n"RESET);
+					printf(KRED"Invalid command\n"RESET);
 					break;
 		}
 	}

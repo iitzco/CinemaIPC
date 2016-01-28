@@ -1,4 +1,4 @@
-echo "Compilando"
+echo "Compiling..."
 gcc database.c serverIPC.c fifo.c lib/getnum.c lib/stdion.c -o server
 gcc cinemaIPC.c userIPC.c clientIPC.c clientFront.c fifo.c lib/getnum.c lib/stdion.c -o client
 echo "Done!"

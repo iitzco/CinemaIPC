@@ -1,4 +1,4 @@
-echo "Compilando.."
+echo "Compiling..."
 if [ ! -d ./signalsIPC ]
 	then mkdir signalsIPC
 fi
@@ -7,10 +7,10 @@ if gcc -g cinemaIPC.c userIPC.c database.c clientIPC.c serverIPC.c signalsIPC.c 
 then
 	if gcc -g cinemaIPC.c userIPC.c database.c clientIPC.c clientFront.c signalsIPC.c lib/getnum.c lib/stdion.c -o client; 
 	then
-		echo "Compilado Correctamente. Disfrute su película!";
+		echo "Done!";
 	else
-		echo "Error de compilación.";
+		echo "Compilation error.";
 	fi
 else
-	echo "Error de compilación.";
+	echo "Compilation error.";
 fi

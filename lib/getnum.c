@@ -41,7 +41,7 @@ getint(const char mensaje[], ...)
 		else
 			salir = finalBuffer();
 		if ( !salir)
-			printf("Comando invalido\n");
+			printf("Invalid command\n");
 
 	} while (! salir);
 	return n;
@@ -74,7 +74,7 @@ getfloat(const char mensaje[], ...)
 		else
 			salir = finalBuffer();
 		if ( !salir)
-			printf("\nDato incorrecto\n");
+			printf("\nIncorrect data\n");
 	} while (! salir);
 	return n;
 }
@@ -98,7 +98,7 @@ getdouble(const char mensaje[], ...)
 		else
 			salir = finalBuffer();
 		if ( !salir)
-			printf("\nDato incorrecto\n");
+			printf("\nIncorrect data\n");
 	} while (! salir);
 	return n;
 }
@@ -120,7 +120,7 @@ yesNo(const char mensaje[], ...)
 		op = getchar();
 		if ( strchr("SsNn", op) == NULL)
 		{
-			printf("\nDato incorrecto\n");
+			printf("\nIncorrect data\n");
 			if (op != '\n')
 				BORRA_BUFFER;
 		}

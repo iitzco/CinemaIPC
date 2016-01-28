@@ -19,7 +19,7 @@
 int createShm(char * path){
 	int fd;
 	if ((fd = shm_open(path,O_RDWR|O_CREAT, 0666)) == -1 ){
-		printf("Error al inicializar la memoria compartida\n");
+		// printf("Error al inicializar la memoria compartida\n");
 		return -1;
 	}
 	return fd;
@@ -33,7 +33,7 @@ int existsShm(char * path){
 sem_t * createSem(char * path, int init){
 	sem_t * i;
 	if ((i=sem_open(path,O_RDWR|O_CREAT,0666,init))==SEM_FAILED){
-		printf("No pudo crear el semaforo\n");
+		// printf("No pudo crear el semaforo\n");
 		return NULL;
 	}
 	return i;
@@ -45,7 +45,7 @@ int existsSem(char * path){
 
 int up(sem_t * sem){
 	if (sem_post(sem)==-1){
-		printf("No se puede hacer up sobre semaforo\n");
+		// printf("No se puede hacer up sobre semaforo\n");
 		return -1;
 	}
 	return 0;
@@ -53,7 +53,7 @@ int up(sem_t * sem){
 
 int down(sem_t * sem){
 	if (sem_wait(sem)==-1){
-		printf("No se puede hacer up sobre semaforo\n");
+		// printf("No se puede hacer up sobre semaforo\n");
 		return -1;
 	}
 	return 0;
@@ -78,7 +78,7 @@ sem_t * getSem(char * path){
 	if (!existsSem(path)){
 		i=createSem(path,0);
 		if (i==NULL){
-			printf("Error al crear el semaforo del servidor\n");
+			// printf("Error al crear el semaforo del servidor\n");
 			return NULL;
 		}
 	}else{
@@ -102,7 +102,7 @@ int sendCommand (struct com * command,int pid){
 	fd=getShm(SHM_SERVER);
 	int * mem;
 	if (!(mem = mmap(NULL, SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0))){
-		printf("Error al escribir de la memoria compartida\n");
+		// printf("Error al escribir de la memoria compartida\n");
 		return -1;
 	}
 	//Sobre el otro del servudor
@@ -136,7 +136,7 @@ int sendCommand (struct com * command,int pid){
 	fd=getShm(pathShm);
 	void * msg;
 	if (!(msg = mmap(NULL, SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0))){
-		printf("Error al escribir de la memoria compartida\n");
+		// printf("Error al escribir de la memoria compartida\n");
 		return -1;
 	}
 
@@ -185,7 +185,7 @@ int receiveCommand (struct com * command, int pidClient){
 
 	void * msg;
 	if (!(msg = mmap(NULL, SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0))){
-		printf("Error al escribir de la memoria compartida\n");
+		// printf("Error al escribir de la memoria compartida\n");
 		return -1;
 	}
 
@@ -207,7 +207,7 @@ int sendAnswer (struct ret * ret, int pid){
 
 	void * msg;
 	if (!(msg = mmap(NULL, SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0))){
-		printf("Error al escribir de la memoria compartida\n");
+		// printf("Error al escribir de la memoria compartida\n");
 		return -1;
 	}
 
@@ -241,7 +241,7 @@ int receiveAnswer (struct ret * ret, int pid){
 
 	void * msg;
 	if (!(msg = mmap(NULL, SIZE, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0))){
-		printf("Error al escribir de la memoria compartida\n");
+		// printf("Error al escribir de la memoria compartida\n");
 		return -1;
 	}
 
@@ -272,11 +272,11 @@ int receivePID (){
 	int fd=0;	
 	fd=getShm(SHM_SERVER);
 	if (fd==-1){
-		printf("No se puede abrir la memoria compartida\n");
+		// printf("No se puede abrir la memoria compartida\n");
 	}
 	int *mem=NULL;
 	if (!(mem = mmap(NULL, SIZE, PROT_WRITE|PROT_READ, MAP_SHARED, fd, 0))){
-		printf("Error al leer de la memoria compartida\n");
+		// printf("Error al leer de la memoria compartida\n");
 		return -1;
 	}
 	close(fd);

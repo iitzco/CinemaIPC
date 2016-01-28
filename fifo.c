@@ -33,7 +33,7 @@ int sendCommand (struct com * command,int pid){
 		fd=open("/tmp/fifo",O_WRONLY);
 	}
 	if (writen(fd,&pid,sizeof(int))!=sizeof(int)){
-		printf("No puede escribir el pid\n");
+		// printf("No puede escribir el pid\n");
 		return -1;
 	}
 
@@ -45,7 +45,7 @@ int sendCommand (struct com * command,int pid){
 	}
 	
 	if (writen(fd,command,sizeof(struct com))!=sizeof(struct com)){
-		printf("No puede mandar el comando\n");
+		// printf("No puede mandar el comando\n");
 		return -1;
 	}
 	return 0;
@@ -62,7 +62,7 @@ int receiveCommand (struct com * command, int pidClient){
 	}
 	
 	if (readn(fd,command,sizeof(struct com))!=sizeof(struct com)){
-		printf("No llega a leer\n");
+		// printf("No llega a leer\n");
 	}
 	return 0;
 }
@@ -78,7 +78,7 @@ int sendAnswer (struct ret * ret, int pid){
 	}
 	
 	if (writen(fd,ret,sizeof(struct ret))!=sizeof(struct ret)){
-		printf("No puede mandar la respuesta\n");
+		// printf("No puede mandar la respuesta\n");
 		return -1;
 	}
 	return 0;
@@ -93,7 +93,7 @@ int receiveAnswer (struct ret * ret, int pid){
 		fd=open(path,O_RDONLY);
 	}	
 	if (readn(fd,ret,sizeof(struct ret))!=sizeof(struct ret)){
-		printf("No llega a leer\n");
+		// printf("No llega a leer\n");
 		return -1;
 	}
 	return 0;
@@ -103,12 +103,12 @@ int receivePID (){
 	int fd;
 	createFIFO("/tmp/fifo");
 	if ((fd=open("/tmp/fifo",O_RDONLY))==-1){
-		printf("No se puede abrir\n");
+		// printf("No se puede abrir\n");
 		return -1;
 	}
 	int pid;
 	if (readn(fd,&pid,sizeof(int))!=sizeof(int)){
-		printf("No puede leer del principal el pid\n");
+		// printf("No puede leer del principal el pid\n");
 		return -1;
 	}
 	return pid;
