@@ -1,6 +1,8 @@
 Cinema administration and booking app using diverse Linux IPC mechanisms and file locking
 ==============================
 
+*Attention: this app was implemented for Linux Operating Systems.*
+
 #### This is a terminal app written in C that simulates a cinema administration and booking system. 
 
 #### Two types of architectures were implemented:
